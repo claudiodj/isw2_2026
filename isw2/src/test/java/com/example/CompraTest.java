@@ -1,5 +1,9 @@
 package com.example;
 
+import com.example.model.Cliente;
+import com.example.model.Compra;
+import com.example.model.Sucursal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,6 +23,7 @@ public class CompraTest {
     // Instanciamos un objeto clase compra con valores que nos pueden servir para el test
     private Compra com = new Compra(cli, suc, new Date(), 20000, 1000);
     private Compra com2 = new Compra(cli, suc, new Date(), 20000, 2001);
+    private Compra com3 = new Compra();
 
     @Test
     void testGetClienteCompra() {
@@ -33,7 +38,7 @@ public class CompraTest {
 
     @Test
     void testGetImporteCompra() {
-
+        assertNotNull(com3);
     }
 
     @Test

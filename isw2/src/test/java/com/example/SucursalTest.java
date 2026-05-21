@@ -1,7 +1,12 @@
 package com.example;
 
+import com.example.model.Sucursal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.Duration;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +35,13 @@ public class SucursalTest {
 
     @Test
     void testGetNumSuc() {
+    assertTimeout(Duration.ofSeconds(2), () -> {
+            Sucursal suc = new Sucursal(10, "Sargento Cabral", 1250, "AZ963JK");
+            assertEquals(suc.getNumSuc(), 10);
+    });
+}
 
-    }
+    
 
     @Test
     void testSetAltura() {

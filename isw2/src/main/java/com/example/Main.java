@@ -1,51 +1,90 @@
 package com.example;
 
-import java.util.Date;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.example.model.Cliente;
+import com.example.model.Compra;
+import com.example.model.Empresa;
+import com.example.model.Sucursal;
+
+import com.example.services.ClienteServicio;
+import com.example.services.impl.ClienteServicioImpl;
+import com.example.services.EmpresaServicio;
+import com.example.services.impl.EmpresaServicioImpl;
+import com.example.services.SucursalServicio;
+import com.example.services.impl.SucursalServicioImpl;
+import com.example.services.CompraServicio;
+import com.example.services.impl.CompraServicioImpl;
 
 public class Main {
     public static void main(String[] args) {
+        List<Cliente> listaClientes = new ArrayList<>();
+        List<Empresa> listaEmpresas = new ArrayList<>();
+        List<Compra> listaCompras = new ArrayList<>();
+        List<Sucursal> listaSucursales = new ArrayList<>();
 
-        Empresa emp1 = new Empresa("La Anonima", "Santa Fe 1234", "20-12345678-9");
-        Empresa emp2 = new Empresa("Carrefour", "Lavalle 5678", "20-98765432-1");
+        ClienteServicio clienteServicio = new ClienteServicioImpl();
+        EmpresaServicio empresaServicio = new EmpresaServicioImpl();
+        SucursalServicio sucursalServicio = new SucursalServicioImpl();
+        CompraServicio compraServicio = new CompraServicioImpl();
 
-        System.out.println("Empresa 1 : " + emp1.toString());
-        emp1.setNombre("La Anonima");
-        System.out.println("Empresa 1 : " + emp1.toString());
-        System.out.println("Empresa 2 : " + emp2.toString());
+        Scanner scanner = new Scanner(System.in);
+        int opcion = -1;
 
+        do {
+            System.out.println("\n===== MENU PRINCIPAL =====");
+            System.out.println("1. Cargar Cliente");
+            System.out.println("2. Mostrar Clientes");
+            System.out.println("3. Cargar Empresa");
+            System.out.println("4. Mostrar Empresas");
+            System.out.println("5. Cargar Sucursal");
+            System.out.println("6. Mostrar Sucursales");
+            System.out.println("7. Cargar Compra");
+            System.out.println("8. Mostrar Compras");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opcion: ");
+            
+            try {
+                opcion = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                opcion = -1;
+            }
+
+            switch (opcion) {
+                case 1:
+                    listaClientes.add(clienteServicio.cargarCliente());
+                    break;
+                case 2:
+                    clienteServicio.mostrarCliente(listaClientes);
+                    break;
+                case 3:
+                    listaEmpresas.add(empresaServicio.cargarEmpresa());
+                    break;
+                case 4:
+                    empresaServicio.mostrarEmpresa(listaEmpresas);
+                    break;
+                case 5:
+                    listaSucursales.add(sucursalServicio.cargarSucursal());
+                    break;
+                case 6:
+                    sucursalServicio.mostrarSucursal(listaSucursales);
+                    break;
+                case 7:
+                    listaCompras.add(compraServicio.cargarCompra());
+                    break;
+                case 8:
+                    compraServicio.mostrarCompra(listaCompras);
+                    break;
+                case 0:
+                    System.out.println("Saliendo del programa...");
+                    break;
+                default:
+                    System.out.println("Opcion invalida, por favor intente nuevamente.");
+            }
+        } while (opcion != 0);
         
-        Cliente cli1 = new Cliente("Juan", "Lizarraga", 35666777, "5491199667711");
-        Cliente cli2 = new Cliente("Diego", "Ojeda", 35666111, "5491199660055");
-
-        // Obtener fecha y hora actual
-        System.out.println("antes de la llamada" + LocalDateTime.now());
-        LocalDateTime ahora = LocalDateTime.now();
-
-        // Formatear en una forma legible
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-
-        // Mostrar por consola
-        System.out.println("Fecha y hora actual: " + ahora.format(formato));
-        
-        System.out.println("Llamada a getTelefono ");
-        System.out.println(cli1.getTelefono());
-
-        System.out.println("Despues de la llamada " + new Date());
-
-        sucursal suc1 = new sucursal(1, "Santa Fe", 1254, "AB1645CD");
-        sucursal suc2 = new sucursal(1, "Lavalle", 528, "AC1675BB");
-        Compra com1 = new Compra(cli1, suc1, new Date(), 10000, 0);
-        Compra com2 = new Compra(cli1, suc2, new Date(), 20000, 1000);
-        Compra com3 = new Compra(cli2, suc1, new Date(), 18000, 500);
-        Compra com4 = new Compra(cli2, suc2, new Date(), 15000, 1500);
-
-        System.out.println("Compra 1 : " + com1.toString());
-        System.out.println("Compra 2 : " + com2.toString());
-
-        System.out.println("Compra 3 : " + com3.toString());
-        System.out.println("Compra 4 : " + com4.toString());
-
+        scanner.close();
     }
 }

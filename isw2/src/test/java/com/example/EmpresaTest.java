@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.model.Empresa;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +19,8 @@ public class EmpresaTest {
 
     @Test
     void testGetNombre() {
-
+        Empresa emp = new Empresa("La Anonima", "Santa Fe 1234", "20-12345678-9");
+        assertEquals("La Anonima", emp.getNombre());
     }
 
     @Test

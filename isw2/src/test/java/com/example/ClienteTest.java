@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.model.Cliente;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
@@ -49,7 +51,7 @@ public class ClienteTest {
         assertEquals(nom, cli.getNombre());
     }
 
-    @Tag("Prueba unitaria")
+    @Tag("PruebaUnitaria")
     @Test
     void testGetTelefono() {
     assertTimeout(Duration.ofSeconds(2), () -> {
