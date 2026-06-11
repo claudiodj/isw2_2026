@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../biblioteca"
+		},
+		{
+			"path": "../../isw2"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
+}
